@@ -8,13 +8,12 @@
 const { AbiCoder } = require('web3-eth-abi');
 const { keccak256 } = require('web3-utils');
 
-const abiCoder = new AbiCoder();
-
 const signer = {};
 
 function sliceKeccak256(data) {
     return keccak256(data).slice(2);
 }
+
 
 /**
  * Recursively encode a struct's data into a unique string
@@ -36,9 +35,9 @@ signer.encodeMessageData = function encodeMessageData(types, primaryType, messag
             return `${acc}${sliceKeccak256(message[name])}`;
         }
         if (type.includes('[')) {
-            return `${acc}${sliceKeccak256(abiCoder.encodeParameter(type, message[name]))}`;
+            return `${acc}${sliceKeccak256(AbiCoder().encodeParameter(type, message[name]))}`;
         }
-        return `${acc}${abiCoder.encodeParameters([type], [message[name]]).slice(2)}`;
+        return `${acc}${AbiCoder().encodeParameters([type], [message[name]]).slice(2)}`;
     }, sliceKeccak256(signer.encodeStruct(primaryType, types)));
 };
 
