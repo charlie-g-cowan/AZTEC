@@ -117,7 +117,7 @@ class SwapProof extends Proof {
         ]);
         this.hash = outputCoder.hashProofOutput(this.outputs);
         this.validatedProofHash = keccak256(
-            new AbiCoder().encodeParameters(['bytes32', 'uint24', 'address'], [this.hash, proofs.SWAP_PROOF, this.sender]),
+            AbiCoder().encodeParameters(['bytes32', 'uint24', 'address'], [this.hash, proofs.SWAP_PROOF, this.sender]),
         );
     }
 

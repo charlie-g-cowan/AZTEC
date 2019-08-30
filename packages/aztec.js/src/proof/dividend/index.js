@@ -111,7 +111,7 @@ class DividendProof extends Proof {
         this.outputs = outputCoder.encodeProofOutputs([proofOutput]);
         this.hash = outputCoder.hashProofOutput(this.output);
         this.validatedProofHash = keccak256(
-            new AbiCoder().encodeParameters(['bytes32', 'uint24', 'address'], [this.hash, proofs.DIVIDEND_PROOF, this.sender]),
+            AbiCoder().encodeParameters(['bytes32', 'uint24', 'address'], [this.hash, proofs.DIVIDEND_PROOF, this.sender]),
         );
     }
 

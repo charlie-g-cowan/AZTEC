@@ -14,7 +14,6 @@ function sliceKeccak256(data) {
     return keccak256(data).slice(2);
 }
 
-
 /**
  * Recursively encode a struct's data into a unique string
  *
@@ -37,7 +36,9 @@ signer.encodeMessageData = function encodeMessageData(types, primaryType, messag
         if (type.includes('[')) {
             return `${acc}${sliceKeccak256(AbiCoder().encodeParameter(type, message[name]))}`;
         }
-        return `${acc}${AbiCoder().encodeParameters([type], [message[name]]).slice(2)}`;
+        return `${acc}${AbiCoder()
+            .encodeParameters([type], [message[name]])
+            .slice(2)}`;
     }, sliceKeccak256(signer.encodeStruct(primaryType, types)));
 };
 

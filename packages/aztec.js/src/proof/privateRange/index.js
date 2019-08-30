@@ -159,10 +159,7 @@ class PrivateRangeProof extends Proof {
         this.hash = outputCoder.hashProofOutput(this.output);
 
         this.validatedProofHash = keccak256(
-            new AbiCoder().encodeParameters(
-                ['bytes32', 'uint24', 'address'],
-                [this.hash, proofs.PRIVATE_RANGE_PROOF, this.sender],
-            ),
+            AbiCoder().encodeParameters(['bytes32', 'uint24', 'address'], [this.hash, proofs.PRIVATE_RANGE_PROOF, this.sender]),
         );
     }
 
